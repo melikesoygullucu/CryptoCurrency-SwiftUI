@@ -8,7 +8,16 @@
 import Foundation
 
 class WebService {
-    func getCurrencies() {
-        
+    func getCurrencies(url: URL, completion: @escaping(Result<[CryptoCurrency]?, urlSessionError>) -> Void) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            
+        }
     }
+}
+
+
+enum urlSessionError : Error {
+    case badURL
+    case noData
+    case parsingError
 }
