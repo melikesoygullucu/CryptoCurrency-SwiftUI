@@ -11,7 +11,21 @@ class WebService {
     func getCurrencies(url: URL, completion: @escaping(Result<[CryptoCurrency]?, urlSessionError>) -> Void) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             
-        }
+            if let error = error {
+                completion(.failure(.badURL))
+            }
+            
+            guard let data = data, error == nil else{
+                return completion(.failure(.noData))
+            }
+            
+            guard let currencies = try? JSONDecoder().decode([CryptoCurrency].self, from: data) else {
+                return completion(.failure(.parsingError))
+            }
+            
+            completion(.success(currencies))
+            
+        }.resume()
     }
 }
 
