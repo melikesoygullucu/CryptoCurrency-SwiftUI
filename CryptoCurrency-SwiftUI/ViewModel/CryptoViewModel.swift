@@ -8,7 +8,26 @@
 import Foundation
 
 class CryptoListViewModel : ObservableObject {
+    @Published var cryptoList = [CryptoViewModel]()
     
+    let webService = WebService()
+    
+    func getCurrencies(url : URL) {
+        webService.getCurrencies(url: url) { result in
+            switch result {
+            case .failure(let error) :
+                print(error.localizedDescription)
+                
+            case .success(let cryptos):
+                if let cryptos = cryptos {
+                    DispatchQueue.main.async {
+                        self.cryptoList = cryptos.map(CryptoViewModel.init)
+                    }
+                }
+            }
+            
+        }
+    }
 }
 
 struct CryptoViewModel {
