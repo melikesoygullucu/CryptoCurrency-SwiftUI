@@ -12,7 +12,18 @@ class CryptoListViewModel : ObservableObject {
     
     let webService = WebService()
     
-    func getCurrencies(url : URL) {
+    func getCurrenciesAsync(url: URL) async {
+        do{
+            let currencies = try await webService.getCurrenciesAsync(url: url)
+            DispatchQueue.main.async {
+                self.cryptoList = currencies.map(CryptoViewModel.init)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    /*
+     func getCurrencies(url : URL) {
         webService.getCurrencies(url: url) { result in
             switch result {
             case .failure(let error) :
@@ -28,6 +39,7 @@ class CryptoListViewModel : ObservableObject {
             
         }
     }
+     */
 }
 
 struct CryptoViewModel {

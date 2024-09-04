@@ -31,9 +31,14 @@ struct MainView: View {
                 
             }
             .navigationTitle("Crypto Currencies")
-        }.onAppear(){
-            cryptoListViewModel.getCurrencies(url: URL(string: "https://raw.githubusercontent.com/atilsamancioglu/K21-JSONDataSet/master/crypto.json")!)
+        }.task {
+            await cryptoListViewModel.getCurrenciesAsync(url: URL(string: "https://raw.githubusercontent.com/atilsamancioglu/K21-JSONDataSet/master/crypto.json")!)
         }
+        
+        /*
+         .onAppear(){
+            cryptoListViewModel.getCurrencies(url: URL(string: "https://raw.githubusercontent.com/atilsamancioglu/K21-JSONDataSet/master/crypto.json")!)
+        }*/
     }
     
 }
