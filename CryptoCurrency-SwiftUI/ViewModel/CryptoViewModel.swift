@@ -12,6 +12,8 @@ class CryptoListViewModel : ObservableObject {
     
     let webService = WebService()
     
+    // async-await
+    
     func getCurrenciesAsync(url: URL) async {
         do{
             let currencies = try await webService.getCurrenciesAsync(url: url)
