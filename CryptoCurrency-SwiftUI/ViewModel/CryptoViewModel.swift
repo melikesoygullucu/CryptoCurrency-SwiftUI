@@ -22,6 +22,9 @@ class CryptoListViewModel : ObservableObject {
             print(error)
         }
     }
+    
+    //old way
+    
     /*
      func getCurrencies(url : URL) {
         webService.getCurrencies(url: url) { result in
