@@ -25,6 +25,7 @@ class CryptoListViewModel : ObservableObject {
         }
     }
     
+    
     //old way
     
     /*
